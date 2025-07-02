@@ -1,73 +1,221 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <title>ประภากร วิชัยศร(โค้ชออยลี่)</title>
-<meta name="description" content="Data base Aekket team" />
-<meta name="keywords" content="Keywords related to your webpage" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta http-equiv="cleartype" content="on">
-<meta name="apple-mobile-web-app-title" content="DATA BASE">
-<link rel="shortcut icon" type="image/png" href="https://lh3.googleusercontent.com/d/1GNTsQfBXQVEPHVwSAGmu7BVX4wiRsvG5" />
-<link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/d/1GNTsQfBXQVEPHVwSAGmu7BVX4wiRsvG5" />
-<link rel="apple-touch-icon" sizes="72x72" href="https://lh3.googleusercontent.com/d/1GNTsQfBXQVEPHVwSAGmu7BVX4wiRsvG5" />
-<link rel="apple-touch-icon" sizes="114x114" href="https://lh3.googleusercontent.com/d/1GNTsQfBXQVEPHVwSAGmu7BVX4wiRsvG5" />
-
-<!-- Open Graph Meta Tags -->
-<meta property="og:title" content="ประภากร วิชัยศร(โค้ชออยลี่)" />
-<meta property="og:description" content="Data base Aekket team" />
-<meta property="og:image" content="https://lh3.googleusercontent.com/d/1GNTsQfBXQVEPHVwSAGmu7BVX4wiRsvG5" />
-<meta property="og:url" content="https://nilmat2007.github.io/oil/" />
-<meta property="og:type" content="website" />
-
-<!-- Twitter Card Meta Tags -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="ประภากร วิชัยศร(โค้ชออยลี่)" />
-<meta name="twitter:description" content="Data base Aekket team" />
-<meta name="twitter:image" content="https://lh3.googleusercontent.com/d/1GNTsQfBXQVEPHVwSAGmu7BVX4wiRsvG5" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <style>
-   #homeBtn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background-color: #333;
-      color: #fff;
-      border: none;
-      font-size: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-      transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-    #homeBtn:hover {
-      background-color: #555;
-      transform: scale(1.1);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบจัดการสต็อก Dropship</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-<body>
-  <div>
-    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" src="https://script.google.com/macros/s/AKfycbz3lJxfXkQR47RmkJNVfB4GfMDDnMWRtNB7nNUpGhihcqXDxdYn6zD_OPzwjXPbBEKltg/exec"></iframe>
-    <button id="homeBtn"><i class="fas fa-home"></i></button>
-  </div>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <div id="app" class="min-h-screen flex flex-col">
+        <!-- Navbar -->
+        <nav class="bg-blue-600 text-white p-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <h1 class="text-xl font-bold">ระบบจัดการสต็อก Dropship</h1>
+                <div>
+                    <span id="user-info" class="mr-4"></span>
+                    <button id="logout-btn" class="bg-red-500 px-4 py-2 rounded hidden">ออกจากระบบ</button>
+                </div>
+            </div>
+        </nav>
 
-  <script>
-    const homeBtn = document.getElementById('homeBtn');
-    const iframe = document.querySelector('iframe');
-    homeBtn.addEventListener('click', () => {
-      iframe.src = 'https://script.google.com/macros/s/AKfycbz3lJxfXkQR47RmkJNVfB4GfMDDnMWRtNB7nNUpGhihcqXDxdYn6zD_OPzwjXPbBEKltg/exec';
-    });
-  </script>
+        <!-- Main Content -->
+        <div class="container mx-auto p-6">
+            <!-- Login Page -->
+            <div id="login-page" class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-4 text-center">เข้าสู่ระบบ</h2>
+                <div class="mb-4">
+                    <label class="block text-gray-700">ชื่อผู้ใช้</label>
+                    <input id="username" type="text" class="w-full p-2 border rounded">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">รหัสผ่าน</label>
+                    <input id="password" type="password" class="w-full p-2 border rounded">
+                </div>
+                <button id="login-btn" class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">เข้าสู่ระบบ</button>
+            </div>
+
+            <!-- Team Member Dashboard -->
+            <div id="team-dashboard" class="hidden">
+                <h2 class="text-2xl font-bold mb-4">แดชบอร์ดทีมงาน</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold mb-4">เบิกสินค้า</h3>
+                        <select id="product-select" class="w-full p-2 border rounded mb-4"></select>
+                        <input id="quantity" type="number" placeholder="จำนวน" class="w-full p-2 border rounded mb-4">
+                        <input id="recipient-name" type="text" placeholder="ชื่อผู้รับ" class="w-full p-2 border rounded mb-4">
+                        <input id="recipient-phone" type="text" placeholder="เบอร์โทร" class="w-full p-2 border rounded mb-4">
+                        <input id="recipient-address" type="text" placeholder="ที่อยู่" class="w-full p-2 border rounded mb-4">
+                        <button id="submit-order" class="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700">ส่งสินค้า</button>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold mb-4">คะแนนและการคืน</h3>
+                        <p id="points-balance" class="mb-4"></p>
+                        <button id="redeem-item" class="w-full bg-blue-600 text-white p-2 rounded mb-2 hover:bg-blue-700">คืนเป็นของ</button>
+                        <button id="redeem-cash" class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">คืนเป็นเงิน</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Dashboard -->
+            <div id="admin-dashboard" class="hidden">
+                <h2 class="text-2xl font-bold mb-4">แดชบอร์ดผู้ดูแลระบบ</h2>
+                <div class="bg-white p-6 rounded-lg shadow-md mb-4">
+                    <h3 class="text-xl font-bold mb-4">จัดการสต็อก</h3>
+                    <div id="stock-list"></div>
+                    <input id="new-product-name" type="text" placeholder="ชื่อสินค้าใหม่" class="w-full p-2 border rounded mb-4">
+                    <input id="new-product-quantity" type="number" placeholder="จำนวน" class="w-full p-2 border rounded mb-4">
+                    <input id="new-product-points" type="number" placeholder="คะแนนต่อหน่วย" class="w-full p-2 border rounded mb-4">
+                    <button id="add-product" class="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700">เพิ่มสินค้า</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold mb-4">ประวัติการจัดส่ง</h3>
+                    <input id="search-delivery" type="text" placeholder="ค้นหาด้วยชื่อหรือเบอร์โทร" class="w-full p-2 border rounded mb-4">
+                    <div id="delivery-history"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock authentication (replace with Google Apps Script API call)
+        let currentUser = null;
+
+        // Login
+        $('#login-btn').click(function() {
+            const username = $('#username').val();
+            const password = $('#password').val();
+            
+            // Call Google Apps Script to verify credentials
+            $.post('https://script.google.com/macros/s/AKfycbyRjAKpRI31ytpyPsvEPq_JBai7O3EbxICAGaldEQaVzxsVu5cjq_2R9X1wuSCyYEcIUw/exec', { action: 'login', username, password }, function(response) {
+                if (response.success) {
+                    currentUser = response.user;
+                    $('#user-info').text(`ยินดีต้อนรับ, ${currentUser.username}`);
+                    $('#logout-btn').removeClass('hidden');
+                    $('#login-page').addClass('hidden');
+                    if (currentUser.role === 'admin') {
+                        $('#admin-dashboard').removeClass('hidden');
+                        loadAdminData();
+                    } else {
+                        $('#team-dashboard').removeClass('hidden');
+                        loadTeamData();
+                    }
+                } else {
+                    alert('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง');
+                }
+            });
+        });
+
+        // Logout
+        $('#logout-btn').click(function() {
+            currentUser = null;
+            $('#user-info').text('');
+            $('#logout-btn').addClass('hidden');
+            $('#team-dashboard').addClass('hidden');
+            $('#admin-dashboard').addClass('hidden');
+            $('#login-page').removeClass('hidden');
+        });
+
+        // Load team data (products, points)
+        function loadTeamData() {
+            $.post('YOUR_GOOGLE_APPS_SCRIPT_URL', { action: 'getProducts' }, function(response) {
+                let options = '<option value="">เลือกสินค้า</option>';
+                response.products.forEach(product => {
+                    options += `<option value="${product.id}" data-points="${product.points}">${product.name} (คงเหลือ: ${product.quantity})</option>`;
+                });
+                $('#product-select').html(options);
+                $('#points-balance').text(`คะแนนสะสม: ${response.userPoints}`);
+            });
+        }
+
+        // Submit order
+        $('#submit-order').click(function() {
+            const productId = $('#product-select').val();
+            const quantity = $('#quantity').val();
+            const recipient = {
+                name: $('#recipient-name').val(),
+                phone: $('#recipient-phone').val(),
+                address: $('#recipient-address').val()
+            };
+            
+            $.post('YOUR_GOOGLE_APPS_SCRIPT_URL', {
+                action: 'submitOrder',
+                userId: currentUser.id,
+                productId,
+                quantity,
+                recipient
+            }, function(response) {
+                if (response.success) {
+                    alert('บันทึกการจัดส่งเรียบร้อย');
+                    loadTeamData();
+                } else {
+                    alert('เกิดข้อผิดพลาด: ' + response.message);
+                }
+            });
+        });
+
+        // Load admin data (stock, delivery history)
+        function loadAdminData() {
+            $.post('YOUR_GOOGLE_APPS_SCRIPT_URL', { action: 'getStock' }, function(response) {
+                let stockHtml = '';
+                response.products.forEach(product => {
+                    stockHtml += `<div class="mb-2">ชื่อ: ${product.name}, จำนวน: ${product.quantity}, คะแนน: ${product.points}</div>`;
+                });
+                $('#stock-list').html(stockHtml);
+            });
+
+            $.post('YOUR_GOOGLE_APPS_SCRIPT_URL', { action: 'getDeliveryHistory' }, function(response) {
+                let historyHtml = '';
+                response.deliveries.forEach(delivery => {
+                    historyHtml += `<div class="mb-2">ชื่อ: ${delivery.recipient.name}, โทร: ${delivery.recipient.phone}, ที่อยู่: ${delivery.recipient.address}, สินค้า: ${delivery.productName}, จำนวน: ${delivery.quantity}</div>`;
+                });
+                $('#delivery-history').html(historyHtml);
+            });
+        }
+
+        // Add new product (admin)
+        $('#add-product').click(function() {
+            const product = {
+                name: $('#new-product-name').val(),
+                quantity: $('#new-product-quantity').val(),
+                points: $('#new-product-points').val()
+            };
+            
+            $.post('YOUR_GOOGLE_APPS_SCRIPT_URL', { action: 'addProduct', product }, function(response) {
+                if (response.success) {
+                    alert('เพิ่มสินค้าเรียบร้อย');
+                    loadAdminData();
+                } else {
+                    alert('เกิดข้อผิดพลาด: ' + response.message);
+                }
+            });
+        });
+
+        // Search delivery history
+        $('#search-delivery').on('input', function() {
+            const query = $(this).val();
+            $.post('YOUR_GOOGLE_APPS_SCRIPT_URL', { action: 'searchDelivery', query }, function(response) {
+                let historyHtml = '';
+                response.deliveries.forEach(delivery => {
+                    historyHtml += `<div class="mb-2">ชื่อ: ${delivery.recipient.name}, โทร: ${delivery.recipient.phone}, ที่อยู่: ${delivery.recipient.address}, สินค้า: ${delivery.productName}, จำนวน: ${delivery.quantity}</div>`;
+                });
+                $('#delivery-history').html(historyHtml);
+            });
+        });
+
+        // Redeem points
+        $('#redeem-item, #redeem-cash').click(function() {
+            const type = $(this).attr('id') === 'redeem-item' ? 'item' : 'cash';
+            $.post('YOUR_GOOGLE_APPS_SCRIPT_URL', { action: 'redeemPoints', userId: currentUser.id, type }, function(response) {
+                if (response.success) {
+                    alert(`คืน${type === 'item' ? 'เป็นของ' : 'เป็นเงิน'}เรียบร้อย`);
+                    loadTeamData();
+                } else {
+                    alert('เกิดข้อผิดพลาด: ' + response.message);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
